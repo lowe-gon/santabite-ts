@@ -5,7 +5,28 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/assets/*": ["./assets/*"]
-    }
+    },
+    "skipLibCheck": true,
+    "noUncheckedSideEffectImports": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "erasableSyntaxOnly": true,
+    "noImplicitOverride": true,
+    "noErrorTruncation": true,
+    "exactOptionalPropertyTypes": true,
+    "allowJs": true,
+
+    // Bundler mode
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "noEmit": true
+    // "types": ["@hugeicons/core-free-icons", "@hugeicons/react-native"]
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }
