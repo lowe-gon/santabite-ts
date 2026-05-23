@@ -9,9 +9,9 @@ import {
   Outfit_700Bold,
   Outfit_800ExtraBold,
   Outfit_900Black,
-} from "@expo-google-fonts/outfit";
-import React from "react";
-import * as SplashScreen from "expo-splash-screen";
+} from '@expo-google-fonts/outfit';
+import React from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 
 SplashScreen.preventAutoHideAsync();
 
