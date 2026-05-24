@@ -1,2 +1,67 @@
 @import 'tailwindcss';
 @import 'uniwind';
+
+@layer theme {
+  :root {
+    /* Dark theme variables */
+    @variant dark {
+      --color-background: oklch(29% 0% 68deg);
+      --color-background-surface: oklch(39% 0% 68deg);
+      --color-primary: oklch(0.6 0.2 240);
+      --color-card: oklch(0.2 0.01 240);
+      --color-border: oklch(0.3 0.02 240);
+    }
+
+    /* Light theme variables */
+    @variant light {
+      --color-background: oklch(0.98 0.005 32);
+      --color-background-surface: oklch(92% 0% 68deg);
+      --color-primary: oklch(0.5 0.2 240);
+      --color-card: oklch(0.98 0 0);
+      --color-border: oklch(0.9 0.01 240);
+    }
+  }
+}
+
+@theme {
+  /* =================== FONT SCHEME =================== */
+  --font-thin: 'Outfit_100Thin';
+  --font-extralight: 'Outfit_200ExtraLight';
+  --font-light: 'Outfit_300Light';
+  --font-regular: 'Outfit_400Regular';
+  --font-medium: 'Outfit_500Medium';
+  --font-semibold: 'Outfit_600SemiBold';
+  --font-bold: 'Outfit_700Bold';
+  --font-extrabold: 'Outfit_800ExtraBold';
+  --font-2xl: 'Outfit_900Black';
+
+  /* =================== SEMANTIC APP SCALE =================== */
+  --text-display: 2.25rem;
+  --text-h1: 1rem;
+  --text-h2: 0.8rem;
+  --text-body: 0.9375rem;
+  --text-meta: 0.8125rem;
+  --text-badge: 0.6875rem;
+}
+
+@utility card {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: var(--color-background-surface);
+  border-radius: 1.5rem;
+}
+
+@utility title {
+  font-family: var(--font-bold);
+  font-size: var(--text-h1);
+  color: var(--color-primary);
+  line-height: 1.25;
+}
+@utility subtitle {
+  font-family: var(--font-bold);
+  font-size: var(--text-h2);
+  color: var(--color-primary);
+  line-height: 1.4;
+}
