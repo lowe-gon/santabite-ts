@@ -9,6 +9,7 @@
     "vendor:ios": "pnpm --prefix vendor-app ios",
     "vendor:android": "pnpm --prefix vendor-app android",
     "customer:dev": "pnpm --prefix customer-app start",
+    "customer:build": "pnpm --prefix customer-app build",
     "customer:ios": "pnpm --prefix customer-app ios",
     "customer:android": "pnpm --prefix customer-app android",
     "driver:dev": "pnpm --prefix driver-app start",

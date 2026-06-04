@@ -5,7 +5,7 @@ export default function Index() {
   const onRemoveGuest = useAuthStore((state) => state.onRemoveGuest);
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="bg-background flex-1">
       <Pressable onPress={onRemoveGuest}>
         <Text>Open Bottomsheet</Text>
       </Pressable>
