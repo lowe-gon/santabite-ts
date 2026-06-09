@@ -1,6 +1,6 @@
-import "@/global.css";
-import useSplashScreen from "@/hooks/use-splash-screen";
-import AppProvider from "@/providers";
+import '@/global.css';
+import useSplashScreen from '@/hooks/use-splash-screen';
+import AppProvider from '@/providers';
 
 export default function RootLayout() {
   const { fontLoaded } = useSplashScreen();
@@ -14,7 +14,7 @@ export default function RootLayout() {
   );
 }
 
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
 function MainLayout() {
   const isSignedIn = false;

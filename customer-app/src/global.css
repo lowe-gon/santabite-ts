@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "uniwind";
+@import 'tailwindcss';
+@import 'uniwind';
 
 @layer theme {
   :root {
@@ -42,16 +42,16 @@
   --breakpoint-tablet: 820px; /* iPad-specific */
 
   /* ============ FONTS ============ */
-  --font-righteous-regular: "Righteous-Regular";
-  --font-thin: "Outfit-Thin";
-  --font-extralight: "Outfit-ExtraLight";
-  --font-light: "Outfit-Light";
-  --font-regular: "Outfit-Regular";
-  --font-medium: "Outfit-Medium";
-  --font-semibold: "Outfit-SemiBold";
-  --font-bold: "Outfit-Bold";
-  --font-extrabold: "Outfit-ExtraBold";
-  --font-extralarge: "Outfit-Black";
+  --font-righteous-regular: 'Righteous-Regular';
+  --font-thin: 'Outfit-Thin';
+  --font-extralight: 'Outfit-ExtraLight';
+  --font-light: 'Outfit-Light';
+  --font-regular: 'Outfit-Regular';
+  --font-medium: 'Outfit-Medium';
+  --font-semibold: 'Outfit-SemiBold';
+  --font-bold: 'Outfit-Bold';
+  --font-extrabold: 'Outfit-ExtraBold';
+  --font-extralarge: 'Outfit-Black';
 }
 
 @utility card-shadow {

@@ -1,6 +1,4 @@
-export function isEmptyObject<T extends Record<string, unknown>>(
-  obj: T,
-): boolean {
+export function isEmptyObject<T extends Record<string, unknown>>(obj: T): boolean {
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) return true;
   }
