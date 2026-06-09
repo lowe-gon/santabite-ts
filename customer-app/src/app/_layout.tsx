@@ -1,33 +1,27 @@
-import '@/global.css';
-import useAppState from '@/hooks/use-app-state';
-import useSplashScreen from '@/hooks/use-splash-screen';
-import AppProvider from '@/providers/app-provider';
-import { useAuthStore } from '@/store/auth-store';
-
-import { Stack } from 'expo-router';
+import "@/global.css";
+import useSplashScreen from "@/hooks/use-splash-screen";
+import AppProvider from "@/providers";
 
 export default function RootLayout() {
-  const { fontsLoaded } = useSplashScreen();
+  const { fontLoaded } = useSplashScreen();
 
-  // Check if the app is inactive
-  useAppState();
-
-  if (!fontsLoaded) return null;
+  if (!fontLoaded) return null;
 
   return (
     <AppProvider>
-      <RootNavigationsLayout />
+      <MainLayout />
     </AppProvider>
   );
 }
 
-function RootNavigationsLayout() {
-  const isGuest = useAuthStore((state) => state.isGuest);
-  const isLoggedIn = false;
+import { Stack } from "expo-router";
+
+function MainLayout() {
+  const isSignedIn = false;
 
   return (
     <Stack>
-      <Stack.Protected guard={!isGuest && !isLoggedIn}>
+      <Stack.Protected guard={!isSignedIn}>
         <Stack.Screen
           name="(auth)"
           options={{
@@ -35,9 +29,9 @@ function RootNavigationsLayout() {
           }}
         />
       </Stack.Protected>
-      <Stack.Protected guard={isGuest || isLoggedIn}>
+      <Stack.Protected guard={isSignedIn}>
         <Stack.Screen
-          name="(tabs)"
+          name="index"
           options={{
             headerShown: false,
           }}

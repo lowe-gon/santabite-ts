@@ -11,6 +11,7 @@ export default function useZodForm<T extends FieldValues>({
   ...props
 }: TUseZodFormProps<T>) {
   const form = useForm<T>({
+    ...props,
     resolver: zodResolver(schema),
   });
 

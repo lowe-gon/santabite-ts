@@ -1,13 +1,23 @@
+import HapticPressable from '@/components/haptic-pressable';
+import { COLORS } from '@/constants/theme';
+import useColorScheme from '@/hooks/use-color-scheme';
 import { AntDesign } from '@expo/vector-icons';
-import { Pressable, Text, View } from 'react-native';
 
 export default function AppleButton() {
+  const colorScheme = useColorScheme();
+
   return (
-    <Pressable className="bg-card h-14 flex-row items-center justify-center rounded-2xl">
-      <View className="absolute top-1/2 left-5 -translate-y-1/2">
-        <AntDesign name="apple" size={22} />
-      </View>
-      <Text className="text-text-main text-sm font-semibold">Continue with Apple</Text>
-    </Pressable>
+    <HapticPressable
+      label="Continue with Apple"
+      className="bg-black dark:bg-white"
+      textColor="text-white dark:text-black"
+      iconLeft={
+        <AntDesign
+          name="apple"
+          size={24}
+          color={colorScheme === 'dark' ? COLORS.light.text : COLORS.dark.text}
+        />
+      }
+    />
   );
 }

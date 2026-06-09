@@ -1,41 +1,46 @@
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+import { View } from 'react-native';
 import ThemedText from './themed-text';
-import ThemedView from './themed-view';
-import type { IInputProps } from './ui/input';
+import type { InputProps } from './ui/input';
 import Input from './ui/input';
 
-interface IControlledInputProps<T extends FieldValues> extends IInputProps {
-  control: Control<T>;
-  name: Path<T>;
+interface ControlledInputProps<TFieldValues extends FieldValues> extends Omit<
+  InputProps,
+  'value' | 'onChangeText'
+> {
+  control: Control<TFieldValues>;
+  name: Path<TFieldValues>;
 }
 
-export default function ControlledInput<T extends FieldValues>({
+export default function ControlledInput<TFieldValues extends FieldValues>({
   control,
   name,
   ...props
-}: IControlledInputProps<T>) {
+}: ControlledInputProps<TFieldValues>) {
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field: { value, onBlur, onChange }, fieldState: { error } }) => (
-        <ThemedView className="relative w-full bg-transparent">
-          <Input
-            {...props}
-            value={value}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            isError={!!error?.message}
-          />
-          {error?.message && (
-            <ThemedView className="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-md bg-red-500/20 px-3 py-1">
-              <ThemedText size="smallBold" className="text-xs text-red-500">
-                {error.message}
-              </ThemedText>
-            </ThemedView>
-          )}
-        </ThemedView>
-      )}
-    />
+    <>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { value, onBlur, onChange }, fieldState: { error } }) => (
+          <View className="relative">
+            <Input
+              {...props}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              isError={!!error?.message}
+            />
+            {error?.message && (
+              <View className="absolute top-1/2 right-4 -translate-y-1/2 rounded-md bg-red-500/30 px-3 py-1">
+                <ThemedText variant="error" className="text-xs">
+                  {error.message}
+                </ThemedText>
+              </View>
+            )}
+          </View>
+        )}
+      />
+    </>
   );
 }

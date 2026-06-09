@@ -1,67 +1,61 @@
-@import 'tailwindcss';
-@import 'uniwind';
+@import "tailwindcss";
+@import "uniwind";
 
 @layer theme {
   :root {
-    /* ==========================================
-       DARK THEME
-       ========================================== */
+    /* ============ DARK THEME ============ */
     @variant dark {
-      --color-background: oklch(17% 0% 68deg);
-      --color-background-surface: oklch(21% 0% 68deg);
-      --color-card: oklch(34% 2% 286deg);
-      --color-border: oklch(26% 0.03 256);
+      /* ============ BACKGROUND COLOR ============ */
+      --color-background: oklch(18% 0% 68deg);
+      --color-surface: oklch(27% 1% 29deg);
 
-      /* Primary */
-      --color-primary: oklch(0.68 0.19 248);
-      --color-primary-hover: oklch(0.74 0.15 248);
-      --color-primary-muted: oklch(22% 0.05 248);
-
-      /* Secondary */
-      --color-secondary: oklch(0.72 0.16 54);
-      --color-secondary-hover: oklch(0.78 0.12 54);
-      --color-secondary-muted: oklch(22% 0.04 54);
-
-      /* Typography */
-      --color-text-main: oklch(0.94 0.008 256);
-      --color-text-muted: oklch(0.76 0.015 256);
+      /* ============ TEXT COLOR ============ */
+      --color-text: oklch(100% 0% 68deg);
+      --color-text-muted: oklch(68% 4% 256deg);
     }
 
-    /* ==========================================
-       LIGHT THEME
-       ========================================== */
     @variant light {
-      --color-background: oklch(0.98 0.005 240);
-      --color-background-surface: oklch(96% 0% 68deg);
-      --color-card: oklch(95% 0% 68deg);
-      --color-border: oklch(0.88 0.02 240);
+      /* ============ BACKGROUND COLOR ============ */
+      --color-background: oklch(18% 0% 68deg);
+      --color-surface: oklch(27% 1% 29deg);
+      --color-background: oklch(100% 0% 68deg);
+      --color-surface: oklch(96% 0% 68deg);
 
-      /* Primary */
-      --color-primary: oklch(0.52 0.24 250);
-      --color-primary-hover: oklch(0.45 0.22 250);
-      --color-primary-muted: oklch(0.92 0.04 250);
-
-      /* Secondary */
-      --color-secondary: oklch(0.6 0.22 40);
-      --color-secondary-hover: oklch(0.53 0.21 40);
-      --color-secondary-muted: oklch(0.93 0.04 40);
-
-      /* Typography */
-      --color-text-main: oklch(0.25 0.02 240);
-      --color-text-muted: oklch(0.5 0.02 240);
+      /* ============ TEXT COLOR ============ */
+      --color-text: oklch(0% 0% 0deg);
+      --color-text-muted: oklch(53% 0% 68deg);
     }
   }
 }
 
 @theme {
-  /* =================== FONT SCHEME =================== */
-  --font-thin: 'Outfit_100Thin';
-  --font-extralight: 'Outfit_200ExtraLight';
-  --font-light: 'Outfit_300Light';
-  --font-regular: 'Outfit_400Regular';
-  --font-medium: 'Outfit_500Medium';
-  --font-semibold: 'Outfit_600SemiBold';
-  --font-bold: 'Outfit_700Bold';
-  --font-extrabold: 'Outfit_800ExtraBold';
-  --font-xl: 'Outfit_900Black';
+  /* ============ OVERRIDE DEFAULT BREAKPOINTS ============ */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+
+  /* ============ CUSTOM BREAKPOINTS ============ */
+  --breakpoint-xs: 480px; /* Extra small devices */
+  --breakpoint-3xl: 1920px; /* Ultra-wide screens */
+  --breakpoint-tablet: 820px; /* iPad-specific */
+
+  /* ============ FONTS ============ */
+  --font-righteous-regular: "Righteous-Regular";
+  --font-thin: "Outfit-Thin";
+  --font-extralight: "Outfit-ExtraLight";
+  --font-light: "Outfit-Light";
+  --font-regular: "Outfit-Regular";
+  --font-medium: "Outfit-Medium";
+  --font-semibold: "Outfit-SemiBold";
+  --font-bold: "Outfit-Bold";
+  --font-extrabold: "Outfit-ExtraBold";
+  --font-extralarge: "Outfit-Black";
+}
+
+@utility card-shadow {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }

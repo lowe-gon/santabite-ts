@@ -1,35 +1,51 @@
 import ControlledInput from '@/components/controlled-input';
-import ThemedText from '@/components/themed-text';
-import ThemedView from '@/components/themed-view';
-import CallingCodeInput from '@/components/ui/calling-code-input';
-import usePhoneAuth from '@/features/signin/hooks/use-phone-auth';
-import { Pressable } from 'react-native';
+import ControlledInputPhone from '@/components/controlled-input-phone';
+import HapticPressable from '@/components/haptic-pressable';
+import useKeyboardAnimation from '@/hooks/use-keyboard-animation';
+import React from 'react';
+import { View } from 'react-native';
+import Animated from 'react-native-reanimated';
+import usePhoneAuth from '../hooks/use-phone-auth';
 
 export default function PhoneForm() {
+  const [value, setValue] = React.useState('');
+  const { fakeView } = useKeyboardAnimation(10);
+
   const { form, _onPhoneAuthSubmit } = usePhoneAuth();
 
+  console.log(form.watch('callingCountry'));
+
   return (
-    <ThemedView className="bg-transparent">
-      <ThemedView className="bg-transparent" direction="row">
-        <ThemedView className="w-28 bg-transparent">
-          <CallingCodeInput
-            form={form}
-            callingCodeField="callingCode"
-            callingCountryField="callingCountry"
-            label="Country"
+    <>
+      <View className="gap-3">
+        <View className="flex-row items-center gap-2">
+          <View className="w-30">
+            <ControlledInputPhone control={form.control} name="callingCountry" />
+          </View>
+          <View className="flex-1">
+            <ControlledInput
+              control={form.control}
+              name="phoneNumber"
+              label="Phone number"
+              keyboardType="decimal-pad"
+              isRequired
+            />
+          </View>
+        </View>
+
+        <Animated.View
+          style={{
+            visibility: 'hidden',
+          }}>
+          <HapticPressable
+            label="Continue"
+            textColor="text-white"
+            onPress={form.handleSubmit(_onPhoneAuthSubmit)}
           />
-        </ThemedView>
-        <ThemedView className="flex-1 bg-transparent">
-          <ControlledInput control={form.control} name="phone" label="Phone number" isRequired />
-        </ThemedView>
-      </ThemedView>
-      <Pressable
-        className="bg-primary rounded-2xl py-4"
-        onPress={form.handleSubmit(_onPhoneAuthSubmit)}>
-        <ThemedText className="text-center text-white" size="smallBold">
-          Continue
-        </ThemedText>
-      </Pressable>
-    </ThemedView>
+        </Animated.View>
+
+        <Animated.View style={fakeView} />
+      </View>
+    </>
   );
 }

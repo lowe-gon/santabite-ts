@@ -1,36 +1,45 @@
-import { Text, type TextProps } from 'react-native';
+import { cn } from "@/libs/cn";
+import type React from "react";
+import { Text, type TextProps } from "react-native";
+import { tv, type VariantProps } from "tailwind-variants";
 
-import { tv, type VariantProps } from 'tailwind-variants';
-
-export const textVariant = tv({
-  base: '',
+const textVariants = tv({
+  base: "text-sm font-regular text-text",
   variants: {
     variant: {
-      success: 'text-green-500',
-      warning: 'text-yellow-500',
-      error: 'text-red-500',
-    },
-    color: {
-      text: 'text-text-main',
-      primary: 'text-primary',
-      secondary: 'text-secondary',
-      muted: 'text-text-muted',
+      primary: "text-blue-500 font-medium",
+      secondary: "text-orange-500 font-medium",
+      link: "underline text-blue-500 font-medium",
+      warning: "text-yellow-500 font-medium",
+      error: "text-red-500 font-medium",
+      success: "text-green-500 font-medium",
     },
     size: {
-      title: 'text-xl leading-relaxed font-medium',
-      subtitle: 'text-base leading-tight font-medium',
-      small: 'font-regular text-sm leading-snug',
-      smallBold: 'text-sm leading-snug font-semibold',
+      sm: "text-sm font-medium leading-6",
+      md: "text-base font-semibold leading-6",
+      lg: "text-lg font-bold leading-6",
     },
-  },
-  defaultVariants: {
-    color: 'text',
-    size: 'small',
   },
 });
 
-export type TThemedTextProps = TextProps & VariantProps<typeof textVariant>;
+export type ThemedTextProps = TextProps &
+  VariantProps<typeof textVariants> &
+  React.PropsWithChildren & {};
 
-export default function ThemedText({ color, variant, size, className, ...rest }: TThemedTextProps) {
-  return <Text className={textVariant({ variant, size, color, className })} {...rest} />;
+export default function ThemedText({
+  className,
+  children,
+  size,
+  variant,
+  ...props
+}: ThemedTextProps) {
+  return (
+    <>
+      <Text
+        {...props}
+        className={cn(textVariants({ variant, size }), className)}>
+        {children}
+      </Text>
+    </>
+  );
 }

@@ -1,89 +1,106 @@
+import useThemeColor from '@/hooks/use-theme-color';
+import { cn } from '@/libs/cn';
 import React from 'react';
-import { Text, TextInput, type FocusEvent, type TextInputProps } from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  type BlurEvent,
+  type FocusEvent,
+  type TextInputProps,
+} from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
+  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { twMerge } from 'tailwind-merge';
-import ThemedView from '../themed-view';
 
-export interface IInputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
   label: string;
-  isRequired?: boolean;
   isError?: boolean;
+  isRequired?: boolean;
 }
 
 export default function Input({
   label,
   value,
+  placeholder,
   isError,
   isRequired,
-  placeholder,
   onFocus,
   onBlur,
-  ...rest
-}: IInputProps) {
-  const [isFocus, setIsFocus] = React.useState(false);
-  const offset = useSharedValue(0);
+  ...props
+}: InputProps) {
+  const text = useThemeColor('text');
+  const textMuted = useThemeColor('textMuted');
+  const [isFocus, setIsFocus] = React.useState<boolean>(false);
+  const translateY = useSharedValue(0);
+  const labelHeight = useSharedValue(0);
 
   const animatedLabelStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: interpolate(offset.value, [0, 1], [0, -12], Extrapolation.CLAMP),
+        translateY: interpolate(
+          translateY.value,
+          [0, 1],
+          [(labelHeight.value / 2) * -1, -20],
+          Extrapolation.CLAMP,
+        ),
       },
     ],
-    fontSize: interpolate(offset.value, [0, 1], [14, 12]),
-    opacity: interpolate(offset.value, [0, 1], [1, 0.7]),
+    fontSize: interpolate(translateY.value, [0, 1], [14, 11]),
+    color: interpolateColor(
+      translateY.value,
+      [0, 1],
+      [isError ? '#fb2c36' : text, isError ? '#fb2c36' : textMuted],
+    ),
   }));
 
   const _onFocus = React.useCallback(
     (e: FocusEvent) => {
-      // eslint-disable-next-line react-hooks/immutability
-      offset.value = withTiming(1, { duration: 300 });
       setIsFocus(true);
+      translateY.value = withTiming(1, { duration: 300 });
       onFocus?.(e);
     },
-    [offset, onFocus],
+    [onFocus],
   );
 
   const _onBlur = React.useCallback(
-    (e: FocusEvent) => {
-      if (!value) {
-        // eslint-disable-next-line react-hooks/immutability
-        offset.value = withTiming(0, { duration: 300 });
-      }
+    (e: BlurEvent) => {
       setIsFocus(false);
+      if (!value) {
+        translateY.value = withTiming(0, { duration: 300 });
+      }
       onBlur?.(e);
     },
-    [offset, value, onBlur],
+    [value, onBlur],
   );
 
   return (
-    <ThemedView
-      testID="input-container"
-      className={twMerge(
-        'bg-card relative h-14 w-full rounded-2xl px-4',
+    <View
+      className={cn(
+        'bg-surface relative h-14 w-full rounded-2xl px-4',
         isError && 'border border-red-500',
       )}>
       <Animated.Text
+        onLayout={(e) => {
+          labelHeight.value = e.nativeEvent.layout.height;
+        }}
         style={animatedLabelStyle}
-        className={twMerge(
-          'text-text-main absolute top-4.5 left-4 font-medium',
-          isError && 'text-red-500',
-        )}>
+        className="text-text absolute top-1/2 left-4 font-medium">
         {label} {isRequired && <Text className="text-red-500">*</Text>}
       </Animated.Text>
+
       <TextInput
-        {...rest}
-        testID="input"
-        placeholder={isFocus ? placeholder : undefined}
-        className="text-text-main mt-2 flex-1 font-medium"
+        {...props}
+        className="text-text mt-2 flex-1 text-sm font-medium"
         onFocus={_onFocus}
         onBlur={_onBlur}
+        placeholder={isFocus ? placeholder : ''}
       />
-    </ThemedView>
+    </View>
   );
 }

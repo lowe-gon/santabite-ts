@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "santabite",
+    "name": "SantaBite",
     "slug": "santabite",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,8 +9,8 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.santabite.app",
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.lhoweh.santabite"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +20,11 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.santabite.app"
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.lhoweh.santabite"
     },
     "web": {
       "output": "static",
@@ -28,6 +32,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-apple-authentication",
       [
         "expo-splash-screen",
         {
@@ -39,45 +44,19 @@
         }
       ],
       [
-        "expo-build-properties",
-        {
-          "android": {
-            "compileSdkVersion": 36,
-            "targetSdkVersion": 36,
-            "buildToolsVersion": "36.0.0",
-            "usePrecompiledHeaders": true
-          },
-          "ios": {
-            "deploymentTarget": "16.4"
-          }
-        }
-      ],
-      [
-        "expo-brownfield",
-        {
-          "ios": {
-            "targetName": "MyBrownfieldTarget",
-            "bundleIdentifier": "com.santabite.brownfield"
-          },
-          "android": {
-            "group": "com.example",
-            "libraryName": "brownfield",
-            "package": "com.santabite.brownfield",
-            "version": "1.0.0"
-          }
-        }
-      ],
-      [
         "expo-secure-store",
         {
           "configureAndroidBackup": true,
           "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
         }
       ],
-      "expo-font",
-      "expo-image",
-      "expo-web-browser",
-      "expo-apple-authentication"
+      [
+        "expo-maps",
+        {
+          "requestLocationPermission": true,
+          "locationPermission": "Allow $(PRODUCT_NAME) to use your location"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
