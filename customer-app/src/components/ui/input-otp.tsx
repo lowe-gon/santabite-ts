@@ -8,6 +8,7 @@ interface IInputOTPContextProps {
   onChange: (text: string, index: number) => void;
   onKeyPress: (event: TextInputKeyPressEvent, index: number) => void;
   disabled: boolean;
+  isError: boolean;
 }
 
 const InputOTPContext = React.createContext<IInputOTPContextProps | null>(null);
@@ -15,8 +16,9 @@ const InputOTPContext = React.createContext<IInputOTPContextProps | null>(null);
 export interface IInputOTPProps extends React.PropsWithChildren {
   maxLength: number;
   value: string;
-  onChange: (text: string) => void;
   disabled?: boolean;
+  isError?: boolean;
+  onChange: (text: string) => void;
   onComplete?: () => void;
 }
 
@@ -24,6 +26,7 @@ export function InputOTP({
   maxLength,
   value,
   disabled,
+  isError,
   onChange,
   onComplete,
   children,
@@ -71,9 +74,10 @@ export function InputOTP({
       value={{
         ref: inputRef,
         value: values,
+        isError: isError ?? false,
+        disabled: disabled ?? false,
         onChange: _onChangeText,
         onKeyPress: _onKeyPress,
-        disabled: disabled!,
       }}>
       <View className="flex-row items-center gap-2">{children}</View>
     </InputOTPContext.Provider>
@@ -95,14 +99,20 @@ interface IInputOTPSlotProps {
 }
 
 export function InputOTPSlot({ index }: IInputOTPSlotProps) {
-  const { ref: inputRef, onChange: _onChangeText, onKeyPress: _onKeyPress, value } = useInputOTP();
+  const {
+    ref: inputRef,
+    value,
+    isError,
+    onChange: _onChangeText,
+    onKeyPress: _onKeyPress,
+  } = useInputOTP();
 
   return (
     <View
       testID="otp-input-container"
       className={cn(
         'bg-surface relative h-14 flex-1 rounded-2xl px-4',
-        //   isError && 'border border-red-500',
+        isError && 'border border-red-500',
       )}>
       <TextInput
         ref={(ref) => {

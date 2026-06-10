@@ -20,7 +20,7 @@ export default function SignUpScreen() {
         className="bg-background flex-1 px-4">
         {/* Back Button */}
         <ThemedGlassView
-          className="top-safe absolute left-4 size-14 overflow-hidden rounded-full"
+          className="top-safe absolute left-4 size-12 overflow-hidden rounded-full"
           isInteractive>
           <Pressable
             className="flex-1 items-center justify-center"
@@ -34,7 +34,7 @@ export default function SignUpScreen() {
           <ThemedText className="text-4xl leading-tight font-extrabold">
             Log in easily without a password!
           </ThemedText>
-          <ThemedText size="md" variant="muted">
+          <ThemedText size="md" variant="muted" className="font-medium">
             We&apos;ll get going with Santabite in no time.
           </ThemedText>
 

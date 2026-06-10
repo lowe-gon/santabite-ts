@@ -19,7 +19,7 @@ export default function ControlledInputOTP<T extends FieldValues>({
       control={control}
       name={name}
       render={({
-        field: { value, onBlur, onChange },
+        field: { value, onChange },
         fieldState: { error },
         formState: { isSubmitting },
       }) => (
@@ -30,7 +30,8 @@ export default function ControlledInputOTP<T extends FieldValues>({
               value={value || ''}
               onChange={onChange}
               disabled={isSubmitting}
-              onComplete={onSubmit}>
+              onComplete={onSubmit}
+              isError={!!error?.message}>
               <InputOTPSlot index={1} />
               <InputOTPSlot index={2} />
               <InputOTPSlot index={3} />
@@ -40,7 +41,7 @@ export default function ControlledInputOTP<T extends FieldValues>({
             </InputOTP>
           </View>
           {error?.message && (
-            <View className="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-md bg-red-500/20 px-3 py-1">
+            <View className="absolute right-0 -bottom-7 z-10 rounded-md bg-red-500/20 px-3 py-1">
               <ThemedText className="text-xs text-red-500">{error.message}</ThemedText>
             </View>
           )}

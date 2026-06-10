@@ -1,6 +1,7 @@
 import '@/global.css';
 import useSplashScreen from '@/hooks/use-splash-screen';
 import AppProvider from '@/providers';
+import { useAuthStore } from '@/store/auth-store';
 
 export default function RootLayout() {
   const { fontLoaded } = useSplashScreen();
@@ -17,7 +18,7 @@ export default function RootLayout() {
 import { Stack } from 'expo-router';
 
 function MainLayout() {
-  const isSignedIn = false;
+  const isSignedIn = useAuthStore((state) => state.isSignedIn);
 
   return (
     <Stack>
@@ -31,7 +32,7 @@ function MainLayout() {
       </Stack.Protected>
       <Stack.Protected guard={isSignedIn}>
         <Stack.Screen
-          name="index"
+          name="(tabs)"
           options={{
             headerShown: false,
           }}
