@@ -13,11 +13,13 @@ const textVariants = tv({
       warning: 'font-medium text-yellow-500',
       error: 'font-medium text-red-500',
       success: 'font-medium text-green-500',
+      muted: 'text-text-muted',
     },
     size: {
       sm: 'text-sm leading-6 font-medium',
       md: 'text-base leading-6 font-semibold',
       lg: 'text-lg leading-6 font-bold',
+      xl: 'text-xl leading-6 font-extrabold',
     },
   },
 });

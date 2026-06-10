@@ -18,7 +18,6 @@ const ThemedGlassView = withUniwind(GlassView);
 export default function OtherButton() {
   const text = useThemeColor('text');
   const modalRef = React.useRef<BottomSheetModal>(null);
-  const [visible, setVisible] = React.useState(true);
 
   const _onOpenModal = React.useCallback(() => {
     modalRef.current?.present();
