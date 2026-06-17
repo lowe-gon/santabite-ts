@@ -93,6 +93,7 @@ export default function HapticPressable({
       <Animated.View style={pressableAnimatedStyle}>
         <Pressable
           {...props}
+          testID="HapticPressable"
           onPressOut={_onPressOut}
           className={cn(hapticPressableVariant({ variant, size }), className)}
           onPressIn={_onPressIn}>

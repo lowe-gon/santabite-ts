@@ -57,6 +57,7 @@ export default function InputPhone({ value, onChange }: InputPhoneProps) {
   return (
     <>
       <Pressable
+        testID="InputPhone"
         className="bg-surface relative h-14 w-full rounded-2xl px-4"
         onPress={_onOpenModal}>
         <View className="relative flex-1 flex-row items-center justify-between">

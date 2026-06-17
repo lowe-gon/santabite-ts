@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaListener, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Uniwind } from 'uniwind';
+import QueryClientProvider from './query-client';
 
 export default function AppProvider({ children }: React.PropsWithChildren) {
   return (
@@ -18,7 +19,7 @@ export default function AppProvider({ children }: React.PropsWithChildren) {
               onChange={({ insets }) => {
                 Uniwind.updateInsets(insets);
               }}>
-              {children}
+              <QueryClientProvider>{children}</QueryClientProvider>
             </SafeAreaListener>
           </SafeAreaProvider>
         </KeyboardProvider>

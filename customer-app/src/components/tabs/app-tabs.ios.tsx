@@ -1,8 +1,13 @@
+import { FONTS } from '@/constants/theme';
 import { NativeTabs } from 'expo-router/build/native-tabs';
 
 export default function AppTabs() {
   return (
-    <NativeTabs>
+    <NativeTabs
+      labelStyle={{
+        fontFamily: FONTS.Righteous_Regular,
+        fontSize: 11,
+      }}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />
@@ -14,7 +19,7 @@ export default function AppTabs() {
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="cart">
         <NativeTabs.Trigger.Badge>9+</NativeTabs.Trigger.Badge>
-        <NativeTabs.Trigger.Label>cart</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>Cart</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'cart', selected: 'cart.fill' }} />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="account">

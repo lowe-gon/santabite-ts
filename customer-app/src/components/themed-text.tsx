@@ -16,6 +16,7 @@ const textVariants = tv({
       muted: 'text-text-muted',
     },
     size: {
+      title: 'text-3xl font-extrabold',
       sm: 'text-sm leading-6 font-medium',
       md: 'text-base leading-6 font-semibold',
       lg: 'text-lg leading-6 font-bold',
@@ -37,7 +38,7 @@ export default function ThemedText({
 }: ThemedTextProps) {
   return (
     <>
-      <Text {...props} className={cn(textVariants({ variant, size }), className)}>
+      <Text testID="Text" {...props} className={cn(textVariants({ variant, size }), className)}>
         {children}
       </Text>
     </>

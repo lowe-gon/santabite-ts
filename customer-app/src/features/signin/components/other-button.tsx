@@ -51,9 +51,7 @@ export default function OtherButton() {
                 </Pressable>
               </ThemedGlassView>
             </View>
-            <ThemedText className="text-3xl font-extrabold">
-              Log in or create a Santabite account
-            </ThemedText>
+            <ThemedText size="title">Log in or create a Santabite account</ThemedText>
 
             <View className="gap-2">
               <AppleButton />

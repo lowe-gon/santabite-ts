@@ -13,8 +13,6 @@ export default function PhoneForm() {
 
   const { form, _onPhoneAuthSubmit } = usePhoneAuth();
 
-  console.log(form.watch('callingCountry'));
-
   return (
     <>
       <View className="gap-3">

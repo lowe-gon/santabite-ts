@@ -86,6 +86,7 @@ export default function Input({
         isError && 'border border-red-500',
       )}>
       <Animated.Text
+        testID="InputLabel"
         onLayout={(e) => {
           labelHeight.value = e.nativeEvent.layout.height;
         }}
@@ -96,6 +97,7 @@ export default function Input({
 
       <TextInput
         {...props}
+        testID="Input"
         className="text-text mt-2 flex-1 text-sm font-medium"
         onFocus={_onFocus}
         onBlur={_onBlur}
