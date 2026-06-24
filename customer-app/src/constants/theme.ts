@@ -6,8 +6,8 @@ export const COLORS = {
     textMuted: '#9298a1',
   },
   light: {
-    background: '#FFFFFF',
-    surface: '#F5F5F5',
+    background: '#F2F2F7',
+    surface: '#FFFFF',
     text: '#000000',
     textMuted: '#6d6d6d',
   },

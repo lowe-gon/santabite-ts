@@ -1,5 +1,5 @@
 import { FONTS } from '@/constants/theme';
-import { NativeTabs } from 'expo-router/build/native-tabs';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
 export default function AppTabs() {
   return (
@@ -7,7 +7,9 @@ export default function AppTabs() {
       labelStyle={{
         fontFamily: FONTS.Righteous_Regular,
         fontSize: 11,
-      }}>
+      }}
+      minimizeBehavior="onScrollDown"
+      tabBarRespectsIMEInsets>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />

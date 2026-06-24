@@ -3,7 +3,8 @@ import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import { ImageBackground } from 'expo-image';
 import { Pressable, useWindowDimensions, View } from 'react-native';
 
-import type { RestaurantItemProps } from '@/data/restaurant';
+import type { RestaurantItem } from '@/data/restaurant';
+import { router } from 'expo-router';
 import {
   createAnimatedComponent,
   Easing,
@@ -12,13 +13,13 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 
-interface RestaurantItem {
-  item: RestaurantItemProps;
+interface RestaurantItemProps {
+  item: RestaurantItem;
 }
 
 const AnimatedPressable = createAnimatedComponent(Pressable);
 
-export default function RestaurantItems({ item }: RestaurantItem) {
+export default function RestaurantItems({ item }: RestaurantItemProps) {
   const { width: screenWidth } = useWindowDimensions();
   const scale = useSharedValue(1);
 
@@ -52,7 +53,15 @@ export default function RestaurantItems({ item }: RestaurantItem) {
         ]}
         className="bg-surface h-52 overflow-hidden rounded-2xl"
         onPressIn={_onPressIn}
-        onPressOut={_onPressOut}>
+        onPressOut={_onPressOut}
+        onPress={() =>
+          router.push({
+            pathname: '/restaurant/[id]',
+            params: {
+              id: item.id,
+            },
+          })
+        }>
         <ImageBackground
           source={{
             uri: item.banner_url,

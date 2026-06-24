@@ -16,10 +16,8 @@
 
     @variant light {
       /* ============ BACKGROUND COLOR ============ */
-      --color-background: oklch(18% 0% 68deg);
-      --color-surface: oklch(27% 1% 29deg);
-      --color-background: oklch(100% 0% 68deg);
-      --color-surface: oklch(96% 0% 68deg);
+      --color-background: oklch(96% 2% 287deg);
+      --color-surface: oklch(100% 0% 90deg);
 
       /* ============ TEXT COLOR ============ */
       --color-text: oklch(0% 0% 0deg);

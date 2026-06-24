@@ -33,3 +33,22 @@ export async function delay(t: number) {
     setTimeout(resolve, t);
   });
 }
+
+export function generateItemsArray(size: number) {
+  const arr = new Array(size);
+  for (let i = 0; i < size; i++) {
+    arr[i] = i;
+  }
+  return arr;
+}
+
+export function generateSectionsData(size: number, index = 0) {
+  const arr = new Array<{ index: number; data: number[] }>(size);
+  for (let i = 0; i < size; i++) {
+    arr[i] = {
+      index: index + i,
+      data: generateItemsArray(10),
+    };
+  }
+  return arr;
+}

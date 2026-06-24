@@ -37,6 +37,26 @@ export default function Index() {
           restaurants={nearby!}
           isLoading={isLoadingNearby}
         />
+        <RestaurantList
+          title="Nearby restaurant"
+          restaurants={nearby!}
+          isLoading={isLoadingNearby}
+        />
+        <RestaurantList
+          title="Nearby restaurant"
+          restaurants={nearby!}
+          isLoading={isLoadingNearby}
+        />
+        <RestaurantList
+          title="Nearby restaurant"
+          restaurants={nearby!}
+          isLoading={isLoadingNearby}
+        />
+        <RestaurantList
+          title="Nearby restaurant"
+          restaurants={nearby!}
+          isLoading={isLoadingNearby}
+        />
       </ScrollView>
     </View>
   );
