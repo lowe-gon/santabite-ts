@@ -37,12 +37,6 @@ function MainLayout() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="restaurant"
-          options={{
-            headerShown: false,
-          }}
-        />
       </Stack.Protected>
     </Stack>
   );

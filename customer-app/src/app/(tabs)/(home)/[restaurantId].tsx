@@ -1,16 +1,21 @@
 import SectionHeader from '@/components/section-header';
 import type { DataItemProps } from '@/components/section-list';
 import { SectionFlashList } from '@/components/section-list';
+import { ThemedGlassView } from '@/components/themed-glass-view';
+import ThemedText from '@/components/themed-text';
 import type { MenuItem } from '@/data/restaurant';
 import Categories from '@/features/restaurant/components/categories';
 import Header from '@/features/restaurant/components/header';
 import ListHeader from '@/features/restaurant/components/list-header';
 import RestaurantCard from '@/features/restaurant/components/restaurant-card';
 import useRestaurantDetail from '@/features/restaurant/hooks/use-restaurant-detail';
+import useThemeColor from '@/hooks/use-theme-color';
+import { cn } from '@/libs/cn';
+import { isLiquidGlassAvailable } from '@/libs/utils';
 import type { FlashListRef, ViewToken } from '@shopify/flash-list';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Dimensions, ScrollView, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, View } from 'react-native';
 import {
   createAnimatedComponent,
   useAnimatedScrollHandler,
@@ -24,14 +29,16 @@ const HEADER_HEIGHT = screenHeight * 0.25;
 const AnimatedFlashList = createAnimatedComponent(SectionFlashList<MenuItem>);
 
 export default function RestaurantDetailScreen() {
-  const { id: restaurantId } = useLocalSearchParams<{ id: string }>();
+  const { restaurantId } = useLocalSearchParams<{ restaurantId: string }>();
   const { restaurant } = useRestaurantDetail(restaurantId);
+
+  const text = useThemeColor('text');
 
   const insets = useSafeAreaInsets();
   const flashListRef = React.useRef<FlashListRef<DataItemProps<MenuItem>>>(null);
   const categoryScrollRef = React.useRef<ScrollView>(null);
   const [activeTab, setActiveTab] = React.useState(0);
-  const categoryTabWidth = 180;
+  const categoryTabWidth = 200;
 
   const offsetY = useSharedValue(0);
 
@@ -93,7 +100,7 @@ export default function RestaurantDetailScreen() {
       flashListRef.current?.scrollToIndex({
         index: targetFlatIndex,
         animated: true,
-        viewOffset: 10,
+        viewOffset: 50,
         viewPosition: 0,
       });
     }
@@ -130,9 +137,11 @@ export default function RestaurantDetailScreen() {
     },
   ).current;
 
+  const hasCart = true;
+
   return (
     <>
-      <View className="bg-background flex-1 pt-28">
+      <View className="bg-background relative flex-1 pt-28">
         <Header
           bannerURL={restaurant?.banner_url!}
           restaurantAddress={restaurant?.address!}
@@ -175,6 +184,45 @@ export default function RestaurantDetailScreen() {
           }}
           ItemSeparatorComponent={() => <View className="h-8" />}
         />
+
+        {/* Cart Button */}
+        <React.Activity mode={hasCart ? 'visible' : 'hidden'}>
+          <View className="bottom-safe absolute right-4 left-4 z-50">
+            <Pressable>
+              <ThemedGlassView
+                className={cn(
+                  'h-16 flex-1 flex-row items-center justify-center rounded-full',
+                  !isLiquidGlassAvailable() && 'bg-sky-500',
+                )}
+                isInteractive>
+                {/* Count */}
+                <View className="absolute top-1/2 left-8 -translate-y-1/2">
+                  <View className="size-10 items-center justify-center rounded-full border border-white">
+                    <ThemedText size="md">1</ThemedText>
+                  </View>
+                </View>
+                {/* Detail */}
+                <View className="flex-col items-center justify-center">
+                  <ThemedText size="md" className="leading-tight">
+                    View your cart
+                  </ThemedText>
+                  <ThemedText
+                    className="w-36 text-[10px] leading-tight font-medium"
+                    numberOfLines={1}>
+                    {restaurant?.name} - {restaurant?.address}
+                  </ThemedText>
+                </View>
+
+                {/* Total price */}
+                <View className="absolute top-1/2 right-8 -translate-y-1/2">
+                  <ThemedText size="md" numberOfLines={1}>
+                    $ 11500.00
+                  </ThemedText>
+                </View>
+              </ThemedGlassView>
+            </Pressable>
+          </View>
+        </React.Activity>
       </View>
     </>
   );

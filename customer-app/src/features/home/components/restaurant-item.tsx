@@ -56,9 +56,9 @@ export default function RestaurantItems({ item }: RestaurantItemProps) {
         onPressOut={_onPressOut}
         onPress={() =>
           router.push({
-            pathname: '/restaurant/[id]',
+            pathname: '/[restaurantId]',
             params: {
-              id: item.id,
+              restaurantId: item.id,
             },
           })
         }>

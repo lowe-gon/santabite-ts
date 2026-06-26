@@ -1,3 +1,6 @@
+import * as Device from 'expo-device';
+import { isLiquidGlassAvailable as isLiquidGlassEffectAvailable } from 'expo-glass-effect';
+
 /**
  * Checks whether an object is completely empty (has no enumerable own properties).
  * * @template T - A type extending a standard string-keyed record object.
@@ -51,4 +54,12 @@ export function generateSectionsData(size: number, index = 0) {
     };
   }
   return arr;
+}
+
+/**
+ *  Check if the device is iOS and check if the device are supported the liquid glass effect.
+ * @returns {boolean} True if the device version are supported
+ */
+export function isLiquidGlassAvailable(): boolean {
+  return isLiquidGlassEffectAvailable() && Device.osName === 'iOS';
 }

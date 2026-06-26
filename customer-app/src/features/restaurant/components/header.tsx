@@ -1,4 +1,6 @@
 import useThemeColor from '@/hooks/use-theme-color';
+import { cn } from '@/libs/cn';
+import { isLiquidGlassAvailable } from '@/libs/utils';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { GlassContainer, GlassView } from 'expo-glass-effect';
 import { Image } from 'expo-image';
@@ -80,8 +82,8 @@ export default function Header({
   const searchTextAnimatedStyle = useAnimatedStyle(() => ({
     opacity: interpolate(
       offsetY.value,
-      [0, 0, HEADER_HEIGHT * 0.4, HEADER_HEIGHT],
-      [1, 1, 0],
+      [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
+      [1, 0, 0],
       Extrapolation.CLAMP,
     ),
   }));
@@ -99,18 +101,28 @@ export default function Header({
     <>
       <ThemedGlassContainer className="top-safe absolute left-0 z-50 w-full flex-row items-center gap-4 px-4">
         {/* Back button */}
+
         <Pressable onPress={router.back}>
           <ThemedGlassView
             className="size-12 flex-row items-center justify-center rounded-full"
             isInteractive>
-            <Ionicons name="chevron-back" size={24} color={text} />
+            <View
+              className={cn(
+                'h-full w-full flex-row items-center justify-center rounded-full',
+                !isLiquidGlassAvailable() && 'bg-surface',
+              )}>
+              <Ionicons name="chevron-back" size={24} color={text} />
+            </View>
           </ThemedGlassView>
         </Pressable>
 
         {/* Search button */}
         <Pressable onPress={() => console.log('Search pressed')} className="flex-1">
           <ThemedGlassView
-            className="bg-surface/10 h-12 flex-row items-center justify-center rounded-full"
+            className={cn(
+              'h-12 flex-row items-center justify-center rounded-full',
+              !isLiquidGlassAvailable() && 'bg-surface',
+            )}
             isInteractive>
             <Animated.View
               style={searchButtonAnimatedStyle}
@@ -137,7 +149,13 @@ export default function Header({
           <ThemedGlassView
             className="size-12 flex-row items-center justify-center rounded-full"
             isInteractive>
-            <MaterialIcons name="more-horiz" size={24} color={text} />
+            <View
+              className={cn(
+                'h-full w-full flex-row items-center justify-center rounded-full',
+                !isLiquidGlassAvailable() && 'bg-surface',
+              )}>
+              <MaterialIcons name="more-horiz" size={24} color={text} />
+            </View>
           </ThemedGlassView>
         </Pressable>
       </ThemedGlassContainer>

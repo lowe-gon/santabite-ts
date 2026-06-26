@@ -1,7 +1,12 @@
 import { FONTS } from '@/constants/theme';
+import { usePathname, type Href } from 'expo-router';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
+const displayTabs: Href[] = ['/', '/account', '/cart', '/favorite', '/search'];
+
 export default function AppTabs() {
+  const pathname = usePathname();
+
   return (
     <NativeTabs
       labelStyle={{
@@ -9,8 +14,10 @@ export default function AppTabs() {
         fontSize: 11,
       }}
       minimizeBehavior="onScrollDown"
-      tabBarRespectsIMEInsets>
-      <NativeTabs.Trigger name="index">
+      tabBarRespectsIMEInsets
+      hidden={!displayTabs.includes(pathname as Href)}
+      disableTransparentOnScrollEdge>
+      <NativeTabs.Trigger name="(home)">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />
       </NativeTabs.Trigger>
